@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Aoboshi One';
+    src: url('AoboshiOne-Regular.eot');
+    src: local('Aoboshi One Regular'), local('AoboshiOne-Regular'),
+        url('AoboshiOne-Regular.eot?#iefix') format('embedded-opentype'),
+        url('AoboshiOne-Regular.woff2') format('woff2'),
+        url('AoboshiOne-Regular.woff') format('woff'),
+        url('AoboshiOne-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
