@@ -4,6 +4,12 @@ using UnityEngine.Events;
 
 namespace GTAI.NPCs
 {
+    public enum Team
+    {
+        Blue,
+        Red
+    }
+    
     [SelectionBase]
     [RequireComponent(typeof(Animator))]
     public class NPC : MonoBehaviour
@@ -22,12 +28,21 @@ namespace GTAI.NPCs
 
         public bool IsAlive { get; private set; } = true;
         public bool CanMove { get; set; } = true;
+        
         public Vector3 Velocity { get; set; } = Vector3.zero;
         public Vector3 Direction { get; private set; } = Vector3.zero;
         public Vector3 Position => transform.position;
+        
         public float WalkSpeed => walkSpeed;
         public float RunSpeed => runSpeed;
+        
         public Group Group { get; set; }
+        public Team Team => Team.Blue;
+        
+        // NPC sensor will start raycasts from and to this position
+        // TODO sensor should start from the "eyes", NPCs can turn their heads and we should take that into account.
+        // also when checking if an NPC is visible, should we shoot a raycast to its head, torso, and limbs as well?
+        public Vector3 SensorPosition => transform.position + Vector3.up * 1.5f;
 
         #endregion
 
@@ -75,6 +90,11 @@ namespace GTAI.NPCs
             return Group.HasStragglers();
         }
 
+        public bool IsHostile(NPC otherNpc)
+        {
+            return otherNpc.Team != Team;
+        }
+        
         #endregion
     }
 }
