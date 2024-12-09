@@ -1,7 +1,8 @@
 using GTAI.Areas;
+using GTAI.NPCs.Component;
 using UnityEngine;
 
-namespace GTAI.NPCs
+namespace GTAI.NPCs.Spawners
 {
     public class NPCGenerator : MonoBehaviour
     {
@@ -17,7 +18,7 @@ namespace GTAI.NPCs
                 Quaternion rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
 
                 NPC npc = Instantiate(npcPrefab, position, rotation);
-                if (npc.TryGetComponent(out NPCWander wander))
+                if (npc.TryGetComponent(out NPCWander _))
                 {
                     // wander.SetArea(area);
                 }

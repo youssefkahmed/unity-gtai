@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GTAI.NPCs
+namespace GTAI.NPCs.Component
 {
     public class NPCAnimator : NPCComponent
     {

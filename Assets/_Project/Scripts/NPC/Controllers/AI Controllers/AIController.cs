@@ -40,8 +40,8 @@ namespace GTAI.NPCControllers
 		}
 
 		#endregion
-		
-		public override void SetNPC(NPC newNpc)
+
+		protected override void SetNPC(NPC newNpc)
 		{
 			if (npc != null)
 			{

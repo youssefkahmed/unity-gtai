@@ -1,10 +1,11 @@
 using GTAI.Areas;
 using GTAI.Formations;
 using GTAI.NPCs;
+using GTAI.NPCs.Component;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace GTAI.Groups
+namespace GTAI.Groups.Spawners
 {
     [RequireComponent(typeof(GroupManager))]
     public class GroupCreator : MonoBehaviour
@@ -51,7 +52,7 @@ namespace GTAI.Groups
 
             NPC leader = Instantiate(npcLeaderPrefab, leaderPosition, leaderRotation);
             leader.transform.SetParent(parent);
-            if (leader.TryGetComponent(out NPCWander wander))
+            if (leader.TryGetComponent(out NPCWander _))
             {
                 // wander.SetArea(area);
             }

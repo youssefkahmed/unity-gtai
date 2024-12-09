@@ -1,6 +1,6 @@
 using GTAI.Formations;
 using GTAI.Groups;
-using GTAI.NPCControllers;
+using GTAI.NPCControllers.Player;
 using GTAI.NPCs;
 using UnityEngine;
 using UnityEngine.AI;

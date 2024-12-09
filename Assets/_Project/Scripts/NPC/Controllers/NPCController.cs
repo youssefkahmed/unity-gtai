@@ -1,6 +1,6 @@
-﻿using GTAI.NPCs;
+﻿using GTAI.NPCs.Component;
 
-namespace GTAI
+namespace GTAI.NPCControllers
 {
 	public class NPCController : NPCComponent { }
 }

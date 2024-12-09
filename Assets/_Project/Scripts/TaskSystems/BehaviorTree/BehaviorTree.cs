@@ -91,7 +91,7 @@ namespace GTAI.TaskSystem
 			
 			if (Root == null)
 			{
-				Debug.LogError($"Behavior Tree in object '{gameObject.name}' has a null root task.");
+				Debug.LogError($"Behavior Tree in object '{gameObject.name}' has a null root task.", gameObject);
 				return;
 			}
 

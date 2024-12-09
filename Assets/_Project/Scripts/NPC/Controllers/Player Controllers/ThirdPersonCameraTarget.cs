@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GTAI.NPCControllers
+namespace GTAI.NPCControllers.Player
 {
 	/// <summary>
 	/// Used for tagging an object to be the camera's target

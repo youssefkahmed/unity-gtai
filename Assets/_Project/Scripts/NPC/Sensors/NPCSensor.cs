@@ -1,5 +1,6 @@
 using System.Collections;
 using GTAI.NPCs;
+using GTAI.NPCs.Component;
 using UnityEngine;
 
 namespace GTAI.Sensors

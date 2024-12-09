@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-namespace GTAI.NPCs
+namespace GTAI.NPCs.Component
 {
     public class NPCWander : NPCComponent
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GTAI.NPCs
+namespace GTAI.NPCs.Component
 {
     public class NPCComponent : MonoBehaviour
     {
@@ -11,7 +11,7 @@ namespace GTAI.NPCs
             SetNPC(GetComponentInParent<NPC>());
         }
 
-        public virtual void SetNPC(NPC newNpc)
+        protected virtual void SetNPC(NPC newNpc)
         {
             npc = newNpc;
         }

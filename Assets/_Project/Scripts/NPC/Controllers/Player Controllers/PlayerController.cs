@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-namespace GTAI.NPCControllers
+namespace GTAI.NPCControllers.Player
 {
 	/// <summary>
 	/// Class <c>PlayerController</c> allows receiving player input and mapping it to control the movement and rotation
@@ -54,7 +54,7 @@ namespace GTAI.NPCControllers
 
 			characterController.Move(npc.Velocity * Time.deltaTime);
 
-			if (_agent)
+			if (_agent && _agent.isOnNavMesh)
 			{
 				_agent.isStopped = true;
 				_agent.Warp(transform.position);
@@ -71,7 +71,7 @@ namespace GTAI.NPCControllers
 		
 		#region Base Class Overrides
 
-		public override void SetNPC(NPC newNpc)
+		protected override void SetNPC(NPC newNpc)
 		{
 			base.SetNPC(newNpc);
 			if (newNpc == null)

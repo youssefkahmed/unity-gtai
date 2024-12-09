@@ -25,7 +25,7 @@ namespace GTAI.TaskSystem
 	public abstract class Task
 	{
 		/// <summary>
-		/// Used as to detect when Awake is being called more than once.
+		/// Used for detecting when Awake is being called more than once.
 		/// </summary>
 		public bool hasAwoken;
 		
