@@ -4,18 +4,22 @@ namespace GTAI.TaskSystem
 {
 	public class Log : Task
 	{
-		public string Text;
+		public string text;
 
 		public Log(string text)
 		{
-			Text = text;
+			this.text = text;
 		}
 
-		public override TaskStatus OnUpdate()
+		#region Overridden Virtual Methods
+
+		protected override TaskStatus OnUpdate()
 		{
-			Debug.Log(Text);
+			Debug.Log(text);
 
 			return TaskStatus.Success;
 		}
+
+		#endregion
 	}
 }

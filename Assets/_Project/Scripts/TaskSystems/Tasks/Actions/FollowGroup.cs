@@ -24,8 +24,8 @@ namespace GTAI.Tasks
 
 			return 2f;
 		}
-		
-		public override TaskStatus OnUpdate()
+
+		protected override TaskStatus OnUpdate()
 		{
 			UpdateSpeed();
 

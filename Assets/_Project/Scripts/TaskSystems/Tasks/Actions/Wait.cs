@@ -4,23 +4,25 @@ namespace GTAI.TaskSystem
 {
 	public class Wait : Task
 	{
-		public readonly float Duration;
-		public readonly float DurationRandom;
+		public readonly float duration;
+		public readonly float durationRandom;
 
 		private float _timer;
 
 		public Wait(float duration = 1f, float durationRandom = 0f)
 		{
-			Duration = duration;
-			DurationRandom = durationRandom;
+			this.duration = duration;
+			this.durationRandom = durationRandom;
 		}
 
-		public override void OnEntry()
+		#region Overridden Virtual Methods
+
+		protected override void OnEntry()
 		{
-			_timer = Duration + Random.Range(0f, DurationRandom);
+			_timer = duration + Random.Range(0f, durationRandom);
 		}
 
-		public override TaskStatus OnUpdate()
+		protected override TaskStatus OnUpdate()
 		{
 			_timer -= Time.deltaTime;
 			if (_timer <= 0f)
@@ -32,5 +34,7 @@ namespace GTAI.TaskSystem
 
 			return TaskStatus.Running;
 		}
+
+		#endregion
 	}
 }

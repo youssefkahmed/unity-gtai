@@ -60,7 +60,7 @@ namespace GTAI.Tasks
 			Gizmos.DrawSphere(_wanderDestination, 0.5f);
 		}
 
-		public override void OnEntry()
+		protected override void OnEntry()
 		{
 			if (_state == WanderState.Waiting)
 			{
@@ -72,8 +72,8 @@ namespace GTAI.Tasks
 				npc.CanMove = true;
 			}
 		}
-		
-		public override TaskStatus OnUpdate()
+
+		protected override TaskStatus OnUpdate()
 		{
 			switch (_state)
 			{
