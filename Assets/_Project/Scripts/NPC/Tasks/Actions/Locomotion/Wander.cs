@@ -1,5 +1,6 @@
 ﻿using System;
 using GTAI.NPCs;
+using GTAI.NPCTasks;
 using GTAI.TaskSystem;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,12 +14,13 @@ namespace GTAI.Tasks
 		public float searchRadius = 10.0f;
 		
 		public float maxWanderTime = 3f;
+		public float maxWanderTimeRandom = 1f;
 		
 		public float minWaitTime = 3f;
 		public float maxWaitTime = 8f;
 	}
 	
-	public class Wander : NPCTask
+	public class Wander : NPCAction
 	{
 		private enum WanderState
 		{
@@ -34,10 +36,6 @@ namespace GTAI.Tasks
 		private float _waitTime;
 		private float _wanderTime;
 		
-		public Wander(NPC npc, WanderParameters parameters) : base(npc)
-		{
-			_parameters = parameters;
-		}
 
 		#region Overridden NPCTask Methods
 

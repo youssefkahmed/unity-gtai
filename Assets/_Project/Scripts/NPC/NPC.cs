@@ -1,3 +1,4 @@
+using System;
 using GTAI.Groups;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,9 +17,28 @@ namespace GTAI.NPCs
     {
         #region Events
 
+        // Locomotion
         public UnityAction<Vector3> OnSetDestination = delegate {};
         public UnityAction<float> OnSetMaxSpeed = delegate {};
+        /// <summary>
+        /// After setting destination, this returns whether there is a path or not.
+        /// </summary>
+        public Func<bool> HasPathToDestination;
 
+        /// <summary>
+        /// Look at a point in world space.
+        /// </summary>
+        public UnityAction<Vector3> OnLookAt = delegate {};
+
+        /// <summary>
+        /// Returns true if looking at point in world space.
+        /// </summary>
+        public Func<Vector3, bool> IsLookingAt;
+        
+        // Speech
+        public UnityAction<string> OnSay = delegate {}; // say something in a speech bubble
+        public UnityAction<bool> OnSetAim = delegate {};
+        
         #endregion
 
         #region Properties
@@ -27,7 +47,10 @@ namespace GTAI.NPCs
         public AudioSource AudioSource { get; private set; }
 
         public bool IsAlive { get; private set; } = true;
+        public bool IsCarryingGun { get; private set; }
+        
         public bool CanMove { get; set; } = true;
+        public bool CanTurn { get; set; } = true;
         
         public Vector3 Velocity { get; set; } = Vector3.zero;
         public Vector3 Direction { get; private set; } = Vector3.zero;
@@ -72,7 +95,7 @@ namespace GTAI.NPCs
 
         public bool HasGroup()
         {
-            return Group != null;
+            return Group;
         }
 
         public bool IsGroupLeader()
@@ -93,6 +116,21 @@ namespace GTAI.NPCs
         public bool IsHostile(NPC otherNpc)
         {
             return otherNpc.Team != Team;
+        }
+        
+        public bool IsWithinDistance(Vector3 point, float distance)
+        {
+            return Vector3.Distance(Position, point) <= distance;
+        }
+
+        public bool IsWithinDistance(NPC otherNPC, float distance)
+        {
+            return Vector3.Distance(Position, otherNPC.Position) <= distance;
+        }
+
+        public float GetDistance(NPC otherNPC)
+        {
+            return Vector3.Distance(Position, otherNPC.Position);
         }
         
         #endregion

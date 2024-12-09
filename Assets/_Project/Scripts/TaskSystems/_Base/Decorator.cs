@@ -41,7 +41,7 @@ namespace GTAI.TaskSystem
 			Start(child);
 		}
 
-		public override void OnExit()
+		protected override void OnExit()
 		{
 			if (child.Active)
 			{

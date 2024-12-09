@@ -2597,7 +2597,7 @@ PrefabInstance:
     - target: {fileID: 2531590692072891598, guid: 556c19264d490e041b0b81a7a04476c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5034489226668421109, guid: 556c19264d490e041b0b81a7a04476c7,
         type: 3}
@@ -2776,6 +2776,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Guard AI Controller
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531590692072891598, guid: 94b4b80c23c99204f9b6f1b285ff66de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5034489226668421109, guid: 94b4b80c23c99204f9b6f1b285ff66de,
         type: 3}

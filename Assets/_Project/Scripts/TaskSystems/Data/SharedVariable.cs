@@ -6,7 +6,7 @@ namespace GTAI.TaskSystem
 	{
 		public string Name { get; set; }
 
-		public T Value { get; protected set; }
+		public T Value { get; set; }
 		
 		public SharedVariable() { }
 

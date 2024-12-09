@@ -1412,10 +1412,11 @@ GameObject:
   - component: {fileID: 1016485513658832128}
   - component: {fileID: 3688176684026412049}
   - component: {fileID: 3213324351370716954}
+  - component: {fileID: 8170305340186825653}
   - component: {fileID: 1498334049985658477}
   - component: {fileID: 1146484911497126187}
   - component: {fileID: 3391333253616028473}
-  - component: {fileID: 8170305340186825653}
+  - component: {fileID: 1577038867270791056}
   m_Layer: 8
   m_Name: Guard
   m_TagString: Player
@@ -1559,6 +1560,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!143 &8170305340186825653
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5283366864088101481}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.26
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.01
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &1498334049985658477
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1613,32 +1640,27 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 186de84b3207156479abe98f4958fed0, type: 3}
   - {fileID: 8300000, guid: 1a91fcd19acf1e54bba0945d9f390849, type: 3}
   - {fileID: 8300000, guid: 14e8a8d2158bec840b56c54f5266e692, type: 3}
---- !u!143 &8170305340186825653
-CharacterController:
+--- !u!114 &1577038867270791056
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5283366864088101481}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.26
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.01
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8988f7751b53428f993219b1803329f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 10
+  fov: 0.5
+  scanRate: 0.25
+  scanMask:
+    serializedVersion: 2
+    m_Bits: 1
+  drawGizmos: 1
+  defaultGizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  detectedGizmoColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &5445904321850206435
 GameObject:
   m_ObjectHideFlags: 0
@@ -2490,6 +2512,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard AI Controller
       objectReference: {fileID: 0}
+    - target: {fileID: 2531590692072891598, guid: 94b4b80c23c99204f9b6f1b285ff66de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5034489226668421109, guid: 94b4b80c23c99204f9b6f1b285ff66de,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2745,8 +2772,14 @@ PrefabInstance:
     - target: {fileID: 2531590692072891598, guid: 556c19264d490e041b0b81a7a04476c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4408632859626294020, guid: 556c19264d490e041b0b81a7a04476c7,
+        type: 3}
+      propertyPath: externalBehaviorTree
+      value: 
+      objectReference: {fileID: 11400000, guid: 26ee05af852ee254caaa66fbdc8cbcd1,
+        type: 2}
     - target: {fileID: 5034489226668421109, guid: 556c19264d490e041b0b81a7a04476c7,
         type: 3}
       propertyPath: m_LocalPosition.x

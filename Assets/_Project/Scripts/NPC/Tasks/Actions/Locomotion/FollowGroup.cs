@@ -1,32 +1,43 @@
 ﻿using GTAI.NPCs;
+using GTAI.NPCTasks;
 using GTAI.TaskSystem;
 using UnityEngine;
 
 namespace GTAI.Tasks
 {
-	public class FollowGroup : NPCTask
+	public class FollowGroup : NPCAction
 	{
-		public FollowGroup(NPC npc) : base(npc) { }
-
-		#region Overridden NPCTask Methods
+		#region Overridden Virtual Methods
 
 		public override float GetUtility()
 		{
-			if (!npc.HasGroup())
+			if (npc.HasGroup() == false)
 			{
 				return 0f;
 			}
 
-			if (npc.IsGroupLeader() && !npc.GroupHasStragglers())
+			if (npc.IsGroupLeader() && npc.GroupHasStragglers() == false)
 			{
 				return 0f;
 			}
 
-			return 2f;
+			float distanceToGroup = npc.Group.GetDistanceToFormation(npc);
+
+			// We increase utility the more the distance to group is high
+			float t = Mathf.InverseLerp(5f, 30f, distanceToGroup);
+
+			float distanceToGroupUtility = Mathf.Lerp(0f, 3f, t);
+
+			return 2f + distanceToGroupUtility;
 		}
 
 		protected override TaskStatus OnUpdate()
 		{
+			if (npc.HasGroup() == false)
+			{
+				return TaskStatus.Failure;
+			}
+
 			UpdateSpeed();
 
 			if (npc.Group.IsLeader(npc))
@@ -45,7 +56,7 @@ namespace GTAI.Tasks
 		
 		private void UpdateSpeed()
 		{
-			if (npc.Group == null)
+			if (!npc.Group)
 			{
 				return;
 			}

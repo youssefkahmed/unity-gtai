@@ -7,7 +7,7 @@ namespace GTAI.TaskSystem
 	[CustomEditor(typeof(BehaviorTree))]
 	public class BehaviorTreeEditor : Editor
 	{
-		private bool _showData = true;
+		[SerializeField] private bool showData = true;
 
 		public override void OnInspectorGUI()
 		{
@@ -24,9 +24,9 @@ namespace GTAI.TaskSystem
 
 			EditorGUILayout.Space(15f);
 
-			_showData = EditorGUILayout.Foldout(_showData, "Data");
+			showData = EditorGUILayout.Foldout(showData, "Data");
 
-			if (_showData)
+			if (showData)
 			{
 				// Indent contents within the foldout
 				EditorGUI.indentLevel++;

@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace GTAI.TaskSystem
 {
 	public class BehaviorTree : MonoBehaviour
 	{
-		[FormerlySerializedAs("RestartWhenDone")]
 		[SerializeField] private bool restartWhenDone = true;
 		[SerializeField] private ExternalBehaviorTree externalBehaviorTree;
 

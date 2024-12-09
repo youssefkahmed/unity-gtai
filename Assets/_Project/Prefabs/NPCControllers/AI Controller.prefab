@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5034489226668421109}
   - component: {fileID: 1936229431976879051}
-  - component: {fileID: 3326392732271247183}
-  - component: {fileID: 6041252240465805039}
+  - component: {fileID: 4408632859626294020}
   m_Layer: 8
   m_Name: AI Controller
   m_TagString: Untagged
@@ -46,9 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86fa883615490fb46804b1b4d4080434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Agent: {fileID: 0}
-  CatchUpDistance: 5.5
---- !u!114 &3326392732271247183
+  agent: {fileID: 0}
+--- !u!114 &4408632859626294020
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,24 +55,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2531590692072891598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5e1fd25f3244f4c811a69b687ec833f, type: 3}
+  m_Script: {fileID: 11500000, guid: 24e78489a85bfc24f87cd1a653d1d977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wander: {fileID: 6041252240465805039}
---- !u!114 &6041252240465805039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531590692072891598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f836a53c56884e07b05099783180ea14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  minWaitTime: 3
-  maxWaitTime: 8
-  maxWanderTime: 5
-  searchRadius: 10
+  restartWhenDone: 1
+  externalBehaviorTree: {fileID: 0}

@@ -9,19 +9,17 @@ namespace GTAI.NPCControllers
 	{
 		[Header("Components:")]
 		[SerializeField] private NavMeshAgent agent;
-
-		protected readonly UtilitySelector utilitySelector = new();
 		
 		#region Debug & Validation
 
 		protected virtual void OnDrawGizmos()
 		{
-			utilitySelector.OnDrawGizmos();
+			// utilitySelector.OnDrawGizmos();
 		}
 
 		protected virtual void OnDrawGizmosSelected()
 		{
-			utilitySelector.OnDrawGizmosSelected();
+			// utilitySelector.OnDrawGizmosSelected();
 		}
 
 		#endregion
@@ -49,6 +47,7 @@ namespace GTAI.NPCControllers
 			{
 				npc.OnSetDestination -= NPC_OnSetDestination;
 				npc.OnSetMaxSpeed -= NPC_OnSetMaxSpeed;
+				npc.HasPathToDestination -= NPC_OnHasPathToDestination;
 			}
 
 			base.SetNPC(newNpc);
@@ -62,6 +61,7 @@ namespace GTAI.NPCControllers
 			
 			newNpc.OnSetDestination += NPC_OnSetDestination;
 			newNpc.OnSetMaxSpeed += NPC_OnSetMaxSpeed;
+			newNpc.HasPathToDestination += NPC_OnHasPathToDestination;
 
 			if (agent == null)
 			{
@@ -81,6 +81,11 @@ namespace GTAI.NPCControllers
 		private void NPC_OnSetMaxSpeed(float maxSpeed)
 		{
 			agent.speed = maxSpeed;
+		}
+
+		private bool NPC_OnHasPathToDestination()
+		{
+			return agent.pathStatus != NavMeshPathStatus.PathInvalid;
 		}
 		
 		#endregion

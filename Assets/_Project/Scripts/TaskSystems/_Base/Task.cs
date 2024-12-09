@@ -224,7 +224,7 @@ namespace GTAI.TaskSystem
 		/// Called after the task ends on success or failure.
 		/// </summary>
 		// If you have to stop this task manually, use Task.Stop.
-		public virtual void OnExit() { }
+		protected virtual void OnExit() { }
 
 		#endregion
 	}

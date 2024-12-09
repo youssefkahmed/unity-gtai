@@ -72,7 +72,7 @@ namespace GTAI.TaskSystem
 			}
 		}
 
-		public override void OnExit()
+		protected override void OnExit()
 		{
 			// Stop any child task that's running
 			foreach (Task task in tasks.Where(task => task.Active))

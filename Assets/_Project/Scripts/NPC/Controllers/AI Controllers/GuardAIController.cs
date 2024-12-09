@@ -13,10 +13,8 @@ namespace GTAI.NPCControllers
         
         protected override void CreateTasks()
         {
-            _wander = new Wander(npc, wanderParameters);
-            _followGroup = new FollowGroup(npc);
-
-            utilitySelector.CreateTasks(_wander, _followGroup);
+            // _wander = new Wander(npc, wanderParameters);
+            // _followGroup = new FollowGroup(npc);
         }
     }
 }
