@@ -35,8 +35,7 @@ namespace GTAI.NPCControllers
 
 			npc.Velocity = agent.velocity;
 			agent.isStopped = !npc.CanMove;
-			
-			// utilitySelector.OnUpdate();
+			agent.updateRotation = npc.CanTurn;
 		}
 
 		#endregion

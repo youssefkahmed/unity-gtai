@@ -75,7 +75,7 @@ namespace GTAI.NPCs.Locomotion
 
 		private bool OnIsLookingAt(Vector3 targetPosition)
 		{
-			Vector3 direction = (targetPosition - npc.Position);
+			Vector3 direction = targetPosition - npc.Position;
 			direction.y = 0f;
 			direction.Normalize();
 

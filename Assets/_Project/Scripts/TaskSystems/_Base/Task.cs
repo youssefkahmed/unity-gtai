@@ -41,7 +41,7 @@ namespace GTAI.TaskSystem
 		/// </summary>
 		/// Each class that overrides GetUtility has the freedom to choose what to do with this value.
 		/// They can add it to another value, return their own, or do anything they want with it.
-		public float DefaultUtility { get; set; } = 0f;
+		public float DefaultUtility { get; set; }
 
 		#region Status
 

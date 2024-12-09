@@ -38,23 +38,19 @@ namespace GTAI.NPCControllers.ExternalBehaviorTrees
 
 		#endregion
 
-		private Task Engage()
+		private Task Wander()
 		{
-			var root = new Parallel();
-
-			var r = new Repeater(new SelectMainTarget { mainTarget = _mainTarget })
+			if (!wanderEnabled)
 			{
-				repeatForever = true,
-				endOnFailure = true
-			};
+				return new Idle { DefaultUtility = 0.5f };
+			}
 
-			root.AddTask(r);
-			root.AddTask(new SayRandom("STOP!", "YOU THERE, STOP!", "HALT!", "HOSTILE SPOTTED!", "I SEE HIM!", "ENEMY IN SIGHT!", "DROP THE GUN!"));
-			root.AddTask(new EngageMainTarget { mainTarget = _mainTarget });
-			
-			return root;
+			Task wander = CreateWanderBranch();
+			wander.DefaultUtility = 0.5f;
+
+			return wander;
 		}
-
+		
 		private Task CreateWanderBranch()
 		{
 			Sequence sequence = new();
@@ -74,27 +70,30 @@ namespace GTAI.NPCControllers.ExternalBehaviorTrees
 			return new Repeater(sequence);
 		}
 
-		private Task Wander()
+		private Task Engage()
 		{
-			if (!wanderEnabled)
+			var root = new Parallel();
+
+			var r = new Repeater(new SelectMainTarget { mainTarget = _mainTarget })
 			{
-				return new Idle { DefaultUtility = 0.5f };
-			}
+				repeatForever = true,
+				endOnFailure = true
+			};
 
-			Task wander = CreateWanderBranch();
-			wander.DefaultUtility = 0.5f;
-
-			return wander;
+			root.AddTask(r);
+			root.AddTask(new SayRandom("STOP!", "YOU THERE, STOP!", "HALT!", "HOSTILE SPOTTED!", "I SEE HIM!", "ENEMY IN SIGHT!", "DROP THE GUN!"));
+			root.AddTask(new EngageMainTarget { mainTarget = _mainTarget });
+			
+			return root;
 		}
-
+		
 		private static Task Investigate()
 		{
 			SharedVariable<DetectionEntry> investigatedEntry = new();
 
-			return Factory.Sequence("Investigate",
-
+			return Factory.Sequence("Investigate", 
 				new SayRandom("I lost him!", "Where did he go?", "Where is he?"),
-
+				
 				new SetAim { aim = true },
 				new GoToOutOfSightHostile { investigatedEntry = investigatedEntry },
 				new SetAim { aim = false },

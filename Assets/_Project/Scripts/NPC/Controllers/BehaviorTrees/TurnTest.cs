@@ -12,11 +12,11 @@ namespace GTAI.NPCControllers.ExternalBehaviorTrees
 		{
 			Sequence sequence = new();
 			sequence.AddTask(new LookAtRandomAngle());
-			sequence.AddTask(new Wait(1f));
+			sequence.AddTask(new Wait());
 
 			SayRandom say = new ("Turning...", "Uh-uh...", "Yep", "What's over there?", "Let's see...", "Huh?");
 
-			sequence.AddTask(new RandomChance(say, 0.2f));
+			sequence.AddTask(new RandomChance(say, 1f));
 
 			return new Repeater(sequence);
 		}
