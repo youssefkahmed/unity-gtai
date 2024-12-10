@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace GTAI.TaskSystem
+namespace GTAI.TaskSystem.Composites
 {
 	public class UtilitySelector : Composite
 	{

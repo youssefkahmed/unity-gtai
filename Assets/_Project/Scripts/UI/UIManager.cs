@@ -2,6 +2,7 @@ using GTAI.Formations;
 using GTAI.Groups;
 using GTAI.NPCControllers.Player;
 using GTAI.NPCs;
+using GTAI.Player;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;

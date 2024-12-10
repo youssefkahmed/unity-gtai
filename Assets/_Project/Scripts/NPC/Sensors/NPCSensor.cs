@@ -1,6 +1,6 @@
 using System.Collections;
 using GTAI.NPCs;
-using GTAI.NPCs.Component;
+using GTAI.NPCs.Components;
 using UnityEngine;
 
 namespace GTAI.Sensors
@@ -33,7 +33,9 @@ namespace GTAI.Sensors
 		public int VisibleHostilesCount => detectionList.VisibleHostilesCount;
 
 		public int OutOfSightHostileCount => detectionList.OutOfSightHostilesCount;
-
+		
+		public int HostilesCount => detectionList.HostilesCount;
+		
 		public bool IsVisible(NPC target) => detectionList.IsVisible(target);
 		
 		#endregion
@@ -155,7 +157,7 @@ namespace GTAI.Sensors
 			int size = Physics.OverlapSphereNonAlloc(npc.SensorPosition, range, _colliders, scanMask, QueryTriggerInteraction.Ignore);
 			for (var i = 0; i < size; i++)
 			{
-				Collider col = _colliders[i];
+				var col = _colliders[i];
 				var otherNPC = col.GetComponentInParent<NPC>();
 				bool valid = otherNPC != null && otherNPC != npc && otherNPC.IsAlive;
 
@@ -184,7 +186,7 @@ namespace GTAI.Sensors
 
 		private bool IsWithinFOV(NPC target)
 		{
-			Vector3 toTarget = target.Position - npc.Position;
+			var toTarget = target.Position - npc.Position;
 			toTarget.Normalize();
 
 			return Vector3.Dot(npc.transform.forward, toTarget) > fov;
@@ -203,7 +205,7 @@ namespace GTAI.Sensors
 			var validHits = _hits[..size];
 			System.Array.Sort(validHits, (hit1, hit2) => hit1.distance.CompareTo(hit2.distance));
 			
-			foreach (RaycastHit hit in validHits)
+			foreach (var hit in validHits)
 			{
 				var hitNPC = hit.collider.GetComponentInParent<NPC>();
 				

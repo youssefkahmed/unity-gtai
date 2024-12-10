@@ -6,7 +6,9 @@ namespace GTAI.NPCTasks.Actions.Locomotion
 	public class GoTo : NPCAction
 	{
 		public SharedVector3 destination;
-
+		public SharedFloat arriveDistance = 1f;
+		public SharedBool run = false;
+		
 		protected override void OnEntry()
 		{
 			npc.CanMove = true;
@@ -21,7 +23,8 @@ namespace GTAI.NPCTasks.Actions.Locomotion
 		{
 			npc.OnSetDestination?.Invoke(destination.Value);
 
-			if (!npc.HasPathToDestination())
+			npc.OnSetMaxSpeed?.Invoke(run.Value ? npc.RunSpeed : npc.WalkSpeed);
+			if (npc.HasPathToDestination() == false)
 			{
 				return TaskStatus.Failure;
 			}
@@ -36,7 +39,7 @@ namespace GTAI.NPCTasks.Actions.Locomotion
 
 		private bool HasArrived()
 		{
-			return Vector3.Distance(npc.Position, destination.Value) <= 1f;
+			return Vector3.Distance(npc.Position, destination.Value) <= arriveDistance.Value;
 		}
 	}
 }

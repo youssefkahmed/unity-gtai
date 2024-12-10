@@ -1,16 +1,18 @@
-﻿using GTAI.NPCs;
+﻿using GTAI.NPCControllers;
+using GTAI.NPCControllers.Player;
+using GTAI.NPCs;
 using GTAI.UI;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-namespace GTAI.NPCControllers.Player
+namespace GTAI.Player
 {
 	/// <summary>
 	/// Class <c>PlayerController</c> allows receiving player input and mapping it to control the movement and rotation
 	/// of an NPC GameObject 
 	/// </summary>
-	public class PlayerController : NPCController
+	public partial class PlayerController : NPCController
 	{
 		// Access to the NPC, mainly used by the UI scripts.
 		public NPC Npc => npc;
@@ -28,7 +30,8 @@ namespace GTAI.NPCControllers.Player
 		[SerializeField] private float moveSmoothing = 5f;
 
 		private NavMeshAgent _agent;
-
+		private bool _isAttacking;
+		
 		private bool _inputEnabled = true;
 		private Vector2 _lookInput;
 		private Vector2 _moveInput;
@@ -52,7 +55,16 @@ namespace GTAI.NPCControllers.Player
 			UpdateMovement();
 			ApplyGravity();
 
-			characterController.Move(npc.Velocity * Time.deltaTime);
+			if (npc.IsAlive)
+			{
+				if (_isAttacking)
+				{
+					npc.OnTryShoot?.Invoke();
+				}
+				UpdateAiming();
+
+				characterController.Move(npc.Velocity * Time.deltaTime);
+			}
 
 			if (_agent && _agent.isOnNavMesh)
 			{
@@ -102,12 +114,35 @@ namespace GTAI.NPCControllers.Player
 		{
 			_inputEnabled = inputEnabled;
 		}
-        
+
+		private void OnTestKill(InputValue input)
+		{
+			npc.Health.Points = 0f;
+		}
+
+
+		private void OnTestRevive(InputValue input)
+		{
+			npc.Health.Points = 1f;
+		}
+		
 		private void OnMove(InputValue input)
 		{
 			_moveInput = input.Get<Vector2>();
 		}
 
+		private void OnAim(InputValue input)
+		{
+			IsAiming = !IsAiming;
+
+			npc.OnSetAim(IsAiming);
+		}
+		
+		private void OnAttack(InputValue input)
+		{
+			_isAttacking = input.isPressed;
+		}
+		
 		private void OnLook(InputValue input)
 		{
 			_lookInput = input.Get<Vector2>();
@@ -126,14 +161,14 @@ namespace GTAI.NPCControllers.Player
 		{
 			if (characterController.isGrounded == false)
 			{
-				Vector3 velocity = npc.Velocity;
+				var velocity = npc.Velocity;
 				velocity.y += Physics.gravity.y * Time.deltaTime;
 				
 				npc.Velocity = velocity;
 			}
 			else
 			{
-				Vector3 velocity = npc.Velocity;
+				var velocity = npc.Velocity;
 				velocity.y = -3f;
 				
 				npc.Velocity = velocity;
@@ -160,11 +195,11 @@ namespace GTAI.NPCControllers.Player
 				return;
 			}
 
-			Vector3 forward = cameraTarget.forward;
+			var forward = cameraTarget.forward;
 			forward.y = 0f;
 			forward.Normalize();
 
-			Vector3 motion = forward * _moveInput.y + cameraTarget.right * _moveInput.x;
+			var motion = forward * _moveInput.y + cameraTarget.right * _moveInput.x;
 			motion.y = 0f;
 			motion.Normalize();
 			
@@ -177,7 +212,7 @@ namespace GTAI.NPCControllers.Player
 
 			if (motion.sqrMagnitude > 0.01f)
 			{
-				Quaternion targetRotation = Quaternion.LookRotation(motion);
+				var targetRotation = Quaternion.LookRotation(motion);
 
 				npc.transform.rotation = Quaternion.Lerp(npc.transform.rotation, targetRotation, moveSmoothing * Time.deltaTime);
 			}

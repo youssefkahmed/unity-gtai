@@ -1,6 +1,9 @@
-﻿using GTAI.NPCTasks.Actions.Locomotion;
+﻿using GTAI.NPCTasks.Actions.Looking;
 using GTAI.NPCTasks.Actions.Speech;
 using GTAI.TaskSystem;
+using GTAI.TaskSystem.Actions;
+using GTAI.TaskSystem.Composites;
+using GTAI.TaskSystem.Decorators;
 using UnityEngine;
 
 namespace GTAI.NPCControllers.ExternalBehaviorTrees

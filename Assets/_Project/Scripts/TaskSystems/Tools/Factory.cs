@@ -1,4 +1,7 @@
-﻿namespace GTAI.TaskSystem
+﻿using GTAI.TaskSystem.Composites;
+using GTAI.TaskSystem.Decorators;
+
+namespace GTAI.TaskSystem
 {
 	public class Factory
 	{
@@ -18,7 +21,7 @@
 		public static Sequence Sequence(params Task[] tasks)
 		{
 			var sequence = new Sequence();
-			foreach (Task task in tasks)
+			foreach (var task in tasks)
 			{
 				sequence.AddTask(task);
 			}
@@ -28,7 +31,7 @@
 
 		public static Sequence Sequence(string displayName, params Task[] tasks)
 		{
-			Sequence sequence = Sequence(tasks);
+			var sequence = Sequence(tasks);
 
 			sequence.Name = displayName;
 

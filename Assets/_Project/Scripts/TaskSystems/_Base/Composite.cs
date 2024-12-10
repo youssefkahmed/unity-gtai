@@ -12,6 +12,24 @@ namespace GTAI.TaskSystem
 	{
 		public IEnumerable<Task> Tasks => tasks.AsReadOnly();
 		protected readonly List<Task> tasks = new();
+		
+		public bool interruptLowerPriority = false;
+
+		/// <summary>
+		/// These conditions are reevaluated as long as this task is running,
+		/// if at least one condition returns a failure, the composite fails.
+		/// 
+		/// These conditions exist within the composite task and don't have to be present in the behavior tree.
+		/// 
+		/// </summary>
+		protected List<Condition> conditions = new();
+
+		protected Composite() { }
+
+		protected Composite(params Task[] tasks)
+		{
+			this.tasks = new List<Task>(tasks);
+		}
 
 		#region Task Manipulation
 
@@ -36,6 +54,35 @@ namespace GTAI.TaskSystem
 
 		#endregion
 
+		#region Conditions Methods
+
+		public void SetConditions(params Condition[] cond)
+		{
+			conditions = new List<Condition>(cond);
+		}
+
+		public void AddCondition(Condition condition)
+		{
+			conditions.Add(condition);
+		}
+		
+		public bool EvaluateConditions()
+		{
+			foreach (Condition c in conditions)
+			{
+				TaskStatus status = Update(c);
+
+				if (status == TaskStatus.Failure)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		#endregion
+		
 		#region Overridden Virtual Methods
 
 		public override void SetOwner(GameObject owner)

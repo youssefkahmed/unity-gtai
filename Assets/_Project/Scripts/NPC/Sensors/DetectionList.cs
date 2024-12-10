@@ -35,6 +35,14 @@ namespace GTAI.Sensors
 			}
 		}
 
+		public int HostilesCount
+		{
+			get
+			{
+				return _list.Count(entry => entry.isHostile);
+			}
+		}
+		
 		/// <summary>
 		/// Returns the number of all visible NPCs including hostiles and non-hostiles.
 		/// </summary>
@@ -50,7 +58,7 @@ namespace GTAI.Sensors
 		
 		public bool IsVisible(NPC npc)
 		{
-			return Contains(npc, out DetectionEntry entry) && entry.isVisible;
+			return Contains(npc, out var entry) && entry.isVisible;
 		}
 
 		public DetectionEntry GetEntry(NPC npc)
@@ -94,7 +102,7 @@ namespace GTAI.Sensors
 
 		public void Remove(NPC npc)
 		{
-			DetectionEntry entry = GetEntry(npc);
+			var entry = GetEntry(npc);
 
 			Remove(entry);
 		}
@@ -106,7 +114,7 @@ namespace GTAI.Sensors
 		
 		public bool Contains(NPC npc, out DetectionEntry outputEntry)
 		{
-			DetectionEntry entry = _list.FirstOrDefault(entry => npc == entry.npc);
+			var entry = _list.FirstOrDefault(entry => npc == entry.npc);
 			if (entry == null)
 			{
 				outputEntry = null;
@@ -137,7 +145,7 @@ namespace GTAI.Sensors
 		{
 			for (int i = _list.Count - 1; i >= 0; i--)
 			{
-				DetectionEntry entry = _list[i];
+				var entry = _list[i];
 
 				float timeSinceVisible = Time.time - entry.lastSeenTime;
 				if (timeSinceVisible >= maxTime)

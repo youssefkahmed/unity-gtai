@@ -1,5 +1,7 @@
 using System;
 using GTAI.Groups;
+using GTAI.NPCs.Combat;
+using GTAI.NPCs.Health;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -25,6 +27,7 @@ namespace GTAI.NPCs
         /// </summary>
         public Func<bool> HasPathToDestination;
 
+        //Looking
         /// <summary>
         /// Look at a point in world space.
         /// </summary>
@@ -37,17 +40,31 @@ namespace GTAI.NPCs
         
         // Speech
         public UnityAction<string> OnSay = delegate {}; // say something in a speech bubble
+        
+        // Health
+        public UnityAction OnDied = delegate {};
+        public UnityAction OnRevived = delegate {};
+        
+        // Combat
         public UnityAction<bool> OnSetAim = delegate {};
+        public UnityAction OnTryShoot = delegate {};
         
         #endregion
 
         #region Properties
 
+        // Components
         public Animator Animator { get; private set; }
         public AudioSource AudioSource { get; private set; }
 
-        public bool IsAlive { get; private set; } = true;
+        // Health
+        public IHealth Health { get; set; }
+        public bool IsAlive => Health?.IsAlive ?? true;
+
+        // Combat
+        public Gun Gun { get; private set; }
         public bool IsCarryingGun { get; private set; }
+        public bool IsAiming => _isAiming;
         
         public bool CanMove { get; set; } = true;
         public bool CanTurn { get; set; } = true;
@@ -72,6 +89,8 @@ namespace GTAI.NPCs
         [SerializeField] private float walkSpeed = 3.5f;
         [SerializeField] private float runSpeed = 7f;
 
+        private bool _isAiming;
+        
         #region Unity Event Methods
 
         private void Awake()
@@ -131,6 +150,11 @@ namespace GTAI.NPCs
         public float GetDistance(NPC otherNPC)
         {
             return Vector3.Distance(Position, otherNPC.Position);
+        }
+        
+        public void SetAim(bool aim)
+        {
+            _isAiming = IsCarryingGun && aim;
         }
         
         #endregion

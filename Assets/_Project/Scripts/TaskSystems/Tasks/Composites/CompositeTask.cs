@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GTAI.TaskSystem
+namespace GTAI.TaskSystem.Composites
 {
 	public abstract class CompositeTask : Task
 	{

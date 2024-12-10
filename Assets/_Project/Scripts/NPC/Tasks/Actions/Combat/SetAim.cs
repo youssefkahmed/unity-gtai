@@ -4,8 +4,15 @@ namespace GTAI.NPCTasks.Actions.Combat
 {
 	public class SetAim : NPCAction
 	{
-		public SharedVariable<bool> aim;
+		public SharedBool aim;
 
+		public SetAim() { }
+
+		public SetAim(SharedBool aim)
+		{
+			this.aim = aim;
+		}
+		
 		#region Overridden Virtual Methods
 
 		protected override TaskStatus OnUpdate()

@@ -1,7 +1,7 @@
 using GTAI.Areas;
 using GTAI.Formations;
 using GTAI.NPCs;
-using GTAI.NPCs.Component;
+using GTAI.NPCs.Components;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

@@ -1,7 +1,7 @@
 ﻿using GTAI.TaskSystem;
 using UnityEngine;
 
-namespace GTAI.NPCTasks.Actions.Locomotion
+namespace GTAI.NPCTasks.Actions.Looking
 {
 	public class LookAtDirection : NPCAction
 	{

@@ -1,5 +1,5 @@
 ﻿
-namespace GTAI.TaskSystem
+namespace GTAI.TaskSystem.Actions
 {
 	public class Idle : Action
 	{

@@ -1,11 +1,14 @@
 ﻿using GTAI.NPCTasks;
 using GTAI.NPCTasks.Actions.Combat;
 using GTAI.NPCTasks.Actions.Locomotion;
+using GTAI.NPCTasks.Actions.Looking;
 using GTAI.NPCTasks.Actions.Sensors;
 using GTAI.NPCTasks.Actions.Speech;
-using GTAI.Sensors;
 using GTAI.Tasks;
 using GTAI.TaskSystem;
+using GTAI.TaskSystem.Actions;
+using GTAI.TaskSystem.Composites;
+using GTAI.TaskSystem.Decorators;
 using UnityEngine;
 
 namespace GTAI.NPCControllers.ExternalBehaviorTrees
@@ -89,7 +92,7 @@ namespace GTAI.NPCControllers.ExternalBehaviorTrees
 		
 		private static Task Investigate()
 		{
-			SharedVariable<DetectionEntry> investigatedEntry = new();
+			SharedDetectionEntry investigatedEntry = new();
 
 			return Factory.Sequence("Investigate", 
 				new SayRandom("I lost him!", "Where did he go?", "Where is he?"),
@@ -102,7 +105,7 @@ namespace GTAI.NPCControllers.ExternalBehaviorTrees
 
 				new SayRandom("Must have been the wind...", "He's gone...", "I give up...", "I'm not paid enough for this!"),
 
-				new ForgetDetectionEntry { entry = investigatedEntry }
+				new ForgetDetectedEntry { entry = investigatedEntry }
 				);
 		}
 	}

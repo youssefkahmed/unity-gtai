@@ -2,6 +2,7 @@ using GTAI.NPCs;
 using UnityEngine;
 
 #if UNITY_EDITOR
+using GTAI.TaskSystem.Composites;
 using UnityEditor;
 
 namespace GTAI.TaskSystem

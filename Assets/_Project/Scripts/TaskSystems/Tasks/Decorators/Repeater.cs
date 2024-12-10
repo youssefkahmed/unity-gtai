@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GTAI.TaskSystem
+namespace GTAI.TaskSystem.Decorators
 {
 	public class Repeater : Decorator
 	{

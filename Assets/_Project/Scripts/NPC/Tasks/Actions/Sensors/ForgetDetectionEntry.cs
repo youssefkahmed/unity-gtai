@@ -1,12 +1,11 @@
-﻿using GTAI.Sensors;
-using UnityEngine;
+﻿using UnityEngine;
 using GTAI.TaskSystem;
 
 namespace GTAI.NPCTasks.Actions.Sensors
 {
-	public class ForgetDetectionEntry : NPCAction
+	public class ForgetDetectedEntry : NPCAction
 	{
-		public SharedVariable<DetectionEntry> entry = new();
+		public SharedDetectionEntry entry = new();
 
 		#region Overridden Virtual Methods
 
@@ -18,15 +17,15 @@ namespace GTAI.NPCTasks.Actions.Sensors
 
 				return TaskStatus.Failure;
 			}
-			
+
 			if (!entry.Value.npc)
 			{
 				Debug.LogError($"{GetType().Name} action: entry.NPC is null");
 			}
-
-			// we make sure to remove the entry by the NPC reference
+			
+			// We make sure to remove the entry by the NPC reference
 			// because our own entry may be a clone, thus different from the entry in the NPC's detection list.
-			sensor.detectionList.Remove(entry.Value.npc);
+			sensor.detectionList.Remove(entry.Value);
 
 			entry.Value = null;
 

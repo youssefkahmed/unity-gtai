@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GTAI.TaskSystem
+namespace GTAI.TaskSystem.Actions
 {
 	public class Log : Task
 	{

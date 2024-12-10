@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GTAI.NPCs.Component
+namespace GTAI.NPCs.Components
 {
     public class NPCGroupMember : NPCComponent
     {

@@ -1,4 +1,4 @@
-﻿using GTAI.NPCs.Component;
+﻿using GTAI.NPCs.Components;
 
 namespace GTAI.NPCControllers
 {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GTAI.TaskSystem
+namespace GTAI.TaskSystem.Composites
 {
     public class Sequence : Composite
     {
@@ -21,6 +21,10 @@ namespace GTAI.TaskSystem
                 }
             }
         }
+        
+        public Sequence() { }
+
+        public Sequence(params Task[] tasks) : base(tasks) { }
         
         protected bool IsCurrentTaskIndexValid()
         {
@@ -62,6 +66,18 @@ namespace GTAI.TaskSystem
                 return TaskStatus.Failure;
             }
 
+            for (var i = 0; i < currentTaskIndex; i++)
+            {
+                if (ShouldInterruptLowerPriority(tasks[i]))
+                {
+                    Stop(CurrentTask);
+                    currentTaskIndex = i;
+                    Start(CurrentTask);
+
+                    break;
+                }
+            }
+
             TaskStatus status = Update(CurrentTask);
             if (status == TaskStatus.Success)
             {
@@ -73,6 +89,7 @@ namespace GTAI.TaskSystem
                 {
                     return TaskStatus.Success;
                 }
+                
                 Start(CurrentTask);
             }
             else if (status == TaskStatus.Failure)
@@ -84,11 +101,19 @@ namespace GTAI.TaskSystem
             return TaskStatus.Running;
         }
 
-        // overriding the OnExit method here is not necessary
-        // since the base class will automatically stop any running child task
-        //
-        //protected override void OnExit()
-
         #endregion
+
+        private static bool ShouldInterruptLowerPriority(Task task)
+        {
+            if (task is Composite comp)
+            {
+                if (comp.interruptLowerPriority && comp.EvaluateConditions() == false)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

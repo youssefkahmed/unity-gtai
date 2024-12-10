@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GTAI.TaskSystem
+namespace GTAI.TaskSystem.Decorators
 {
 	/// <summary>
 	/// Will evaluate a probability and execute the child task or not. If not will return success.

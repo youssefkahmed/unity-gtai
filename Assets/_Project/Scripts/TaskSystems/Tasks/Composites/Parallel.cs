@@ -1,4 +1,4 @@
-﻿namespace GTAI.TaskSystem
+﻿namespace GTAI.TaskSystem.Composites
 {
 	public class Parallel : Composite
 	{

@@ -1,5 +1,9 @@
 ﻿using GTAI.NPCTasks.Actions.Locomotion;
+using GTAI.Tasks;
 using GTAI.TaskSystem;
+using GTAI.TaskSystem.Actions;
+using GTAI.TaskSystem.Composites;
+using GTAI.TaskSystem.Decorators;
 using UnityEngine;
 
 namespace GTAI.NPCControllers.ExternalBehaviorTrees
@@ -62,6 +66,27 @@ namespace GTAI.NPCControllers.ExternalBehaviorTrees
 			sequence.AddTask(new Wait(1f, 3f));
 			sequence.AddTask(parallelSelector);
 			
+			return new Repeater(sequence);
+		}
+		
+		public static Task CreateWanderBranch(WanderParameters p)
+		{
+			var sequence = new Sequence();
+
+			SharedVector3 wanderDestination = new();
+
+			ParallelSelector parallelSelector = new();
+
+			var moveSequence = new Sequence() { Name = "Move" };
+			moveSequence.AddTask(new PickRandomDestination { destination = wanderDestination });
+			moveSequence.AddTask(new GoTo { destination = wanderDestination });
+
+			parallelSelector.AddTask(new Repeater(moveSequence));
+			parallelSelector.AddTask(new Wait(p.maxWanderTime, p.maxWanderTimeRandom));
+
+			sequence.AddTask(new Wait(p.maxWaitTime, p.maxWaitTime));
+			sequence.AddTask(parallelSelector);
+
 			return new Repeater(sequence);
 		}
 	}

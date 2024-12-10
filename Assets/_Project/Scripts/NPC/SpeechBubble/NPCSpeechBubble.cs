@@ -1,4 +1,4 @@
-using GTAI.NPCs.Component;
+using GTAI.NPCs.Components;
 using UnityEngine;
 
 namespace GTAI.NPCs.Speech
